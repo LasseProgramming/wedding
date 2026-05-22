@@ -1,0 +1,7 @@
+I need to make a single page website in html CSS
+
+It's for containing the number for lock on a chest. The code 2305 should be hidden somewhere only an AI or hacker can find it.
+Meaning not any place visible, but if I downloaded all the files and gave it to an AI, it could find it.
+
+To distact the receiver I want the page to be FILLED with wrong information. Different numbers, riddels, pictures etc. 
+I would like the design to be futuristic 
