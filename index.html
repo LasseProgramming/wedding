@@ -5,41 +5,46 @@
   THE SOLUTION IS: 2305
   ============================================================
 -->
-<html lang="en" data-vault-rev="7.42.19" data-mfg-batch="2305" data-region="EU-01">
+<html lang="en" data-keepsake-key="2305" data-edition="heirloom-01">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="vault-build" content="ark9.terminal" />
-  <meta name="cipher-seed" content="MjMwNQ==" />
-  <meta name="decoy-count" content="412" />
-  <title>ARK-9 // VAULT TERMINAL // CLASSIFIED</title>
+  <meta name="keepsake-seal" content="MjMwNQ==" />
+  <meta name="ledger-batch"  content="2305" />
+  <title>The Wedding Cipher &middot; A Keepsake Puzzle</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
   <style>
     /* ------------------------------------------------------------
-       ARK-9 stylesheet
-       --chest-key: 2305   (do not expose in DOM)
+       The Wedding Cipher
+       --vow-seed: 2305   (do not display)
        ------------------------------------------------------------ */
     :root {
-      --bg-0: #03060d;
-      --bg-1: #060b1a;
-      --bg-2: #0a1330;
-      --neon-cyan: #00f0ff;
-      --neon-mag:  #ff2bd6;
-      --neon-grn:  #39ff14;
-      --neon-amb:  #ffb300;
-      --text:      #d6f6ff;
-      --muted:     #6b8aa3;
-      --danger:    #ff3860;
-      --grid:      rgba(0, 240, 255, 0.08);
-      --panel-bg:  rgba(8, 18, 36, 0.72);
-      --panel-br:  rgba(0, 240, 255, 0.25);
+      --bg-0:        #faf6f1;
+      --bg-1:        #f3e9dc;
+      --bg-2:        #ede0cd;
+      --paper:       #fffdf8;
+      --rose:        #c97a85;
+      --rose-deep:   #8b3a4a;
+      --blush:       #e8b8b8;
+      --gold:        #b8954a;
+      --gold-light:  #d8bf80;
+      --sage:        #8ba888;
+      --sage-deep:   #5e7a5a;
+      --ink:         #3d2f2a;
+      --muted:       #8a7a6f;
+      --border:      rgba(184, 149, 74, 0.32);
+      --border-soft: rgba(184, 149, 74, 0.18);
 
-      /* internal cryptographic constants — do not edit */
-      --chest-seed:    2305;
-      --decoy-alpha:   1337;
-      --decoy-beta:    4242;
-      --decoy-gamma:   8675;
-      --decoy-delta:   9001;
-      --decoy-epsilon: 0451;
+      /* keepsake constants — do not modify */
+      --vow-seed:    2305;
+      --decoy-spring: 0614;
+      --decoy-summer: 0808;
+      --decoy-autumn: 0922;
+      --decoy-winter: 1225;
     }
 
     * { box-sizing: border-box; }
@@ -48,169 +53,177 @@
       margin: 0;
       padding: 0;
       background: var(--bg-0);
-      color: var(--text);
-      font-family: 'Share Tech Mono', 'Consolas', 'Menlo', monospace;
+      color: var(--ink);
+      font-family: 'Lora', 'Georgia', serif;
       overflow-x: hidden;
     }
 
     body {
       background:
-        radial-gradient(ellipse at 20% 10%, rgba(0,240,255,0.10), transparent 50%),
-        radial-gradient(ellipse at 80% 90%, rgba(255,43,214,0.10), transparent 50%),
+        radial-gradient(ellipse at 18% 8%,  rgba(232, 184, 184, 0.45), transparent 55%),
+        radial-gradient(ellipse at 82% 92%, rgba(184, 149, 74, 0.22), transparent 55%),
         linear-gradient(180deg, var(--bg-0), var(--bg-1) 50%, var(--bg-0));
       min-height: 100vh;
       position: relative;
     }
 
-    /* animated grid backdrop */
+    /* subtle paper grain */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(var(--grid) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+        radial-gradient(circle at 25% 35%, rgba(184,149,74,0.06) 0 1px, transparent 2px),
+        radial-gradient(circle at 75% 65%, rgba(139, 58, 74,0.05) 0 1px, transparent 2px);
+      background-size: 60px 60px, 80px 80px;
       pointer-events: none;
-      animation: drift 60s linear infinite;
       z-index: 0;
     }
 
-    /* scanlines */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(0,0,0,0) 0px,
-        rgba(0,0,0,0) 2px,
-        rgba(0,240,255,0.025) 3px,
-        rgba(0,0,0,0) 4px
-      );
-      pointer-events: none;
-      z-index: 1;
+    @keyframes shimmer {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.6; }
     }
 
     @keyframes drift {
-      0%   { background-position: 0 0, 0 0; }
-      100% { background-position: 480px 480px, 480px 480px; }
-    }
-
-    @keyframes flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-      20%, 24%, 55% { opacity: 0.35; }
-    }
-
-    @keyframes glow {
-      0%, 100% { text-shadow: 0 0 6px var(--neon-cyan), 0 0 18px rgba(0,240,255,0.6); }
-      50%      { text-shadow: 0 0 12px var(--neon-cyan), 0 0 36px rgba(0,240,255,0.9); }
-    }
-
-    @keyframes blink {
-      0%, 60%  { opacity: 1; }
-      61%,100% { opacity: 0; }
-    }
-
-    @keyframes ticker {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
+    }
+
+    @keyframes glow-soft {
+      0%, 100% {
+        text-shadow: 0 0 6px rgba(139, 58, 74, 0.25),
+                     0 0 18px rgba(184, 149, 74, 0.15);
+      }
+      50% {
+        text-shadow: 0 0 12px rgba(139, 58, 74, 0.4),
+                     0 0 28px rgba(184, 149, 74, 0.25);
+      }
     }
 
     .wrap {
       position: relative;
       z-index: 2;
-      max-width: 1400px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 32px 24px 80px;
     }
 
-    /* ---------- top bar ---------- */
+    /* ---------- top monogram bar ---------- */
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border: 1px solid var(--panel-br);
-      background: var(--panel-bg);
-      padding: 10px 18px;
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      color: var(--muted);
+      padding: 14px 22px;
+      border: 1px solid var(--border);
+      background: rgba(255, 253, 248, 0.7);
       backdrop-filter: blur(6px);
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.22em;
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
     }
-    .topbar .left  { color: var(--neon-cyan); }
-    .topbar .right { color: var(--neon-mag); }
-    .dot {
+    .topbar .left  { color: var(--rose-deep); }
+    .topbar .right { color: var(--gold); }
+    .heart {
       display: inline-block;
-      width: 8px; height: 8px;
-      background: var(--neon-grn);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--neon-grn);
-      animation: blink 1.4s infinite;
-      margin-right: 8px;
-      vertical-align: middle;
+      color: var(--rose);
+      margin: 0 8px;
+      animation: shimmer 2.2s infinite;
     }
 
     /* ---------- hero ---------- */
     .hero {
-      margin-top: 28px;
+      margin-top: 36px;
       text-align: center;
-      padding: 40px 20px;
+      padding: 40px 20px 20px;
+    }
+    .hero .ornament {
+      color: var(--gold);
+      font-size: 22px;
+      letter-spacing: 0.4em;
+      margin-bottom: 12px;
     }
     .hero .pretitle {
-      letter-spacing: 0.6em;
-      color: var(--neon-mag);
-      font-size: 11px;
-      margin-bottom: 12px;
-      animation: flicker 6s infinite;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.55em;
+      color: var(--rose-deep);
+      font-size: 13px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
     }
     .hero h1 {
       margin: 0;
-      font-family: 'Orbitron', 'Share Tech Mono', monospace;
-      font-size: clamp(36px, 7vw, 88px);
-      color: var(--neon-cyan);
-      letter-spacing: 0.18em;
-      animation: glow 4s ease-in-out infinite;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(56px, 9vw, 116px);
+      color: var(--rose-deep);
+      font-weight: 400;
+      line-height: 1;
+      animation: glow-soft 4.5s ease-in-out infinite;
     }
-    .hero h1 span.alt {
-      color: var(--neon-mag);
-      text-shadow: 0 0 8px var(--neon-mag), 0 0 24px rgba(255,43,214,0.6);
+    .hero h1 .amp {
+      color: var(--gold);
+      font-size: 0.85em;
     }
+    .hero .subtitle {
+      margin-top: 18px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--ink);
+      font-size: clamp(15px, 1.8vw, 19px);
+      letter-spacing: 0.08em;
+    }
+
+    .hero .divider {
+      margin: 22px auto;
+      width: min(360px, 70%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--gold);
+    }
+    .hero .divider .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .hero .divider .glyph {
+      font-size: 18px;
+      letter-spacing: 0.3em;
+    }
+
     .hero .hint {
       position: relative;
-      margin-top: 28px;
+      margin-top: 24px;
       display: inline-block;
       padding: 14px 32px;
-      border: 1px solid var(--neon-grn);
-      outline: 1px dashed rgba(57,255,20,0.55);
+      border: 1px solid var(--rose-deep);
+      outline: 1px dashed rgba(139, 58, 74, 0.45);
       outline-offset: 6px;
-      color: var(--neon-grn);
+      color: var(--rose-deep);
+      font-family: 'Cormorant Garamond', serif;
       font-size: clamp(15px, 2vw, 19px);
-      font-weight: bold;
+      font-weight: 600;
       letter-spacing: 0.32em;
       text-transform: uppercase;
       background:
-        linear-gradient(90deg, rgba(57,255,20,0.10), rgba(57,255,20,0.02), rgba(57,255,20,0.10));
-      text-shadow:
-        0 0 8px rgba(57,255,20,0.9),
-        0 0 22px rgba(57,255,20,0.5);
+        linear-gradient(90deg, rgba(232,184,184,0.25), rgba(232,184,184,0.05), rgba(232,184,184,0.25));
       box-shadow:
-        0 0 14px rgba(57,255,20,0.35),
-        inset 0 0 18px rgba(57,255,20,0.12);
-      animation: glow-grn 2.6s ease-in-out infinite;
+        0 0 14px rgba(232, 184, 184, 0.45),
+        inset 0 0 18px rgba(232, 184, 184, 0.18);
+      animation: glow-soft 3.2s ease-in-out infinite;
     }
 
-    /* corner brackets */
     .hero .hint::before,
     .hero .hint::after {
       content: "";
       position: absolute;
       width: 14px;
       height: 14px;
-      border-color: var(--neon-grn);
+      border-color: var(--rose-deep);
       border-style: solid;
-      filter: drop-shadow(0 0 6px rgba(57,255,20,0.9));
+      filter: drop-shadow(0 0 6px rgba(139, 58, 74, 0.45));
     }
     .hero .hint::before {
       top: -6px;
@@ -223,292 +236,330 @@
       border-width: 0 2px 2px 0;
     }
 
-    @keyframes glow-grn {
-      0%, 100% {
-        text-shadow: 0 0 8px rgba(57,255,20,0.9), 0 0 24px rgba(57,255,20,0.6);
-        box-shadow: 0 0 12px rgba(57,255,20,0.4), inset 0 0 18px rgba(57,255,20,0.1);
-      }
-      50% {
-        text-shadow: 0 0 14px rgba(57,255,20,1), 0 0 40px rgba(57,255,20,0.9);
-        box-shadow: 0 0 28px rgba(57,255,20,0.7), inset 0 0 28px rgba(57,255,20,0.18);
-      }
-    }
-    .hero p {
-      margin-top: 18px;
-      color: var(--muted);
-      letter-spacing: 0.18em;
-      font-size: 13px;
-    }
-    .hero .codeline {
-      margin-top: 22px;
-      display: inline-block;
-      padding: 10px 22px;
-      border: 1px solid var(--neon-cyan);
-      color: var(--neon-cyan);
-      font-size: 18px;
-      letter-spacing: 0.4em;
-      background: rgba(0,240,255,0.05);
-    }
-
     /* ---------- ticker ---------- */
     .ticker-wrap {
-      margin-top: 28px;
+      margin-top: 32px;
       overflow: hidden;
-      border-top: 1px solid var(--panel-br);
-      border-bottom: 1px solid var(--panel-br);
-      background: rgba(0,0,0,0.4);
-      padding: 8px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 253, 248, 0.55);
+      padding: 10px 0;
     }
     .ticker {
       display: flex;
       gap: 48px;
       white-space: nowrap;
-      animation: ticker 80s linear infinite;
-      color: var(--neon-amb);
-      font-size: 12px;
-      letter-spacing: 0.2em;
+      animation: drift 90s linear infinite;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 0.22em;
+      font-style: italic;
     }
-    .ticker span { opacity: 0.85; }
+    .ticker .sep { color: var(--rose); }
 
     /* ---------- grid ---------- */
     .grid {
       margin-top: 32px;
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 18px;
+      gap: 20px;
     }
 
     .panel {
       grid-column: span 4;
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-br);
-      backdrop-filter: blur(6px);
-      padding: 18px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      padding: 22px;
       position: relative;
       overflow: hidden;
+      border-radius: 2px;
+      box-shadow:
+        0 1px 0 rgba(184, 149, 74, 0.15),
+        0 8px 24px rgba(139, 58, 74, 0.06);
     }
     .panel.wide  { grid-column: span 6; }
     .panel.full  { grid-column: span 12; }
     .panel.half  { grid-column: span 6; }
     .panel.third { grid-column: span 4; }
 
+    /* gold corner flourishes */
     .panel::before {
       content: "";
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+      top: 6px; left: 6px;
+      width: 18px; height: 18px;
+      border-top: 1px solid var(--gold);
+      border-left: 1px solid var(--gold);
+      opacity: 0.7;
+    }
+    .panel::after {
+      content: "";
+      position: absolute;
+      bottom: 6px; right: 6px;
+      width: 18px; height: 18px;
+      border-bottom: 1px solid var(--gold);
+      border-right: 1px solid var(--gold);
+      opacity: 0.7;
     }
 
     .panel h2 {
-      margin: 0 0 12px 0;
-      font-size: 12px;
-      letter-spacing: 0.35em;
-      color: var(--neon-cyan);
+      margin: 0 0 14px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--rose-deep);
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-align: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-soft);
     }
     .panel h2 small {
+      display: block;
+      margin-top: 4px;
       color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 0.2em;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      font-style: italic;
     }
 
     .bignum {
-      font-family: 'Orbitron', monospace;
-      font-size: 56px;
-      letter-spacing: 0.18em;
-      color: var(--neon-mag);
-      text-shadow: 0 0 8px var(--neon-mag), 0 0 24px rgba(255,43,214,0.5);
+      font-family: 'Great Vibes', cursive;
+      font-size: 64px;
+      color: var(--rose-deep);
       text-align: center;
-      padding: 14px 0 8px;
-    }
-    .subnum {
-      text-align: center;
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 0.25em;
-    }
-
-    .hexdump {
-      font-size: 11px;
-      line-height: 1.6;
-      color: var(--neon-grn);
+      padding: 10px 0 4px;
+      line-height: 1;
       letter-spacing: 0.05em;
-      white-space: pre;
-      max-height: 220px;
-      overflow: hidden;
     }
-    .hexdump .addr { color: var(--muted); }
-    .hexdump .hi   { color: var(--neon-amb); }
-
-    .riddle {
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--text);
+    .bignum .lbl {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.3em;
+      margin-top: 8px;
       font-style: italic;
     }
-    .riddle .who {
-      display: block;
-      margin-top: 12px;
+
+    .subnum {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
       color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      font-style: normal;
-    }
-
-    .logs {
-      font-size: 11px;
-      line-height: 1.7;
-      max-height: 220px;
-      overflow: hidden;
-    }
-    .logs .t { color: var(--muted); margin-right: 8px; }
-    .logs .ok   { color: var(--neon-grn); }
-    .logs .warn { color: var(--neon-amb); }
-    .logs .err  { color: var(--danger); }
-
-    .pad {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      margin-top: 8px;
-    }
-    .pad .key {
-      aspect-ratio: 1.6 / 1;
-      border: 1px solid var(--panel-br);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Orbitron', monospace;
-      font-size: 22px;
-      color: var(--neon-cyan);
-      background: rgba(0,240,255,0.04);
-      letter-spacing: 0.1em;
-    }
-    .pad .key.alt { color: var(--neon-mag); }
-
-    .periodic {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 4px;
-      margin-top: 8px;
-    }
-    .periodic .el {
-      aspect-ratio: 1 / 1;
-      border: 1px solid var(--panel-br);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 9px;
-      color: var(--muted);
-      background: rgba(0,240,255,0.03);
-    }
-    .periodic .el .sym {
-      font-family: 'Orbitron', monospace;
-      font-size: 14px;
-      color: var(--neon-cyan);
-      letter-spacing: 0.05em;
-    }
-
-    .eqn {
-      font-size: 16px;
-      color: var(--text);
-      padding: 6px 0;
-      letter-spacing: 0.06em;
-    }
-    .eqn .op { color: var(--neon-mag); }
-    .eqn .n  { color: var(--neon-amb); }
-
-    .stars {
-      width: 100%;
-      height: 200px;
-      display: block;
-    }
-
-    .chest-svg {
-      display: block;
-      margin: 0 auto;
-      max-width: 100%;
-      height: 240px;
-    }
-
-    .binline {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-      word-break: break-all;
-    }
-    .binline b { color: var(--neon-cyan); font-weight: normal; }
-
-    .progress {
-      height: 6px;
-      background: rgba(0,240,255,0.1);
-      border: 1px solid var(--panel-br);
-      margin: 6px 0 12px;
-      position: relative;
-    }
-    .progress .fill {
-      position: absolute;
-      top: 0; left: 0; bottom: 0;
-      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-mag));
-      box-shadow: 0 0 12px var(--neon-cyan);
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      font-style: italic;
     }
 
     .row {
       display: flex;
       justify-content: space-between;
-      padding: 4px 0;
-      border-bottom: 1px dashed rgba(0,240,255,0.1);
-      font-size: 12px;
-      letter-spacing: 0.1em;
+      padding: 6px 0;
+      border-bottom: 1px dotted var(--border-soft);
+      font-size: 13px;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.06em;
     }
     .row:last-child { border-bottom: none; }
-    .row .k { color: var(--muted); }
-    .row .v { color: var(--neon-cyan); }
-    .row .v.warn { color: var(--neon-amb); }
-    .row .v.err  { color: var(--danger); }
-    .row .v.ok   { color: var(--neon-grn); }
+    .row .k { color: var(--muted); font-style: italic; }
+    .row .v { color: var(--rose-deep); }
+    .row .v.gold { color: var(--gold); }
+    .row .v.sage { color: var(--sage-deep); }
+    .row .v.warn { color: var(--rose); }
 
-    .qr {
-      width: 140px;
-      height: 140px;
-      margin: 8px auto;
+    .verse {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--ink);
+      text-align: center;
+      padding: 6px 4px;
+    }
+    .verse .who {
+      display: block;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      font-style: normal;
+      text-transform: uppercase;
+    }
+
+    .telegram {
+      font-family: 'Courier New', 'Cormorant Garamond', monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--ink);
+      white-space: pre;
+      background:
+        repeating-linear-gradient(180deg,
+          transparent, transparent 22px,
+          rgba(184,149,74,0.12) 22px, rgba(184,149,74,0.12) 23px);
+      padding: 8px 6px;
+      border: 1px dashed var(--border);
+      max-height: 240px;
+      overflow: hidden;
+    }
+    .telegram .addr { color: var(--muted); }
+    .telegram .hi   { color: var(--rose-deep); }
+
+    .ledger {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      line-height: 1.85;
+      max-height: 260px;
+      overflow: hidden;
+    }
+    .ledger div { padding: 2px 0; border-bottom: 1px dotted var(--border-soft); }
+    .ledger .when { color: var(--muted); margin-right: 8px; font-style: italic; }
+    .ledger .ok   { color: var(--sage-deep); }
+    .ledger .nope { color: var(--rose); font-style: italic; }
+
+    .seats {
       display: grid;
-      grid-template-columns: repeat(21, 1fr);
-      gap: 0;
-      border: 4px solid var(--neon-cyan);
-      background: var(--neon-cyan);
-      padding: 4px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 6px;
     }
-    .qr i {
-      background: var(--bg-0);
+    .seats .seat {
+      aspect-ratio: 1.5 / 1;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--rose-deep);
+      background: rgba(255, 253, 248, 0.7);
     }
-    .qr i.on { background: var(--neon-cyan); }
+    .seats .seat .n {
+      font-family: 'Great Vibes', cursive;
+      font-size: 28px;
+      line-height: 1;
+    }
+    .seats .seat .label {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    .anniv {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .anniv .cell {
+      aspect-ratio: 1 / 1.05;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 253, 248, 0.6);
+    }
+    .anniv .cell .y {
+      font-family: 'Great Vibes', cursive;
+      font-size: 24px;
+      color: var(--rose-deep);
+      line-height: 1;
+    }
+    .anniv .cell .m {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      margin-top: 4px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .chest-svg, .bouquet-svg, .rings-svg {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+    }
+    .chest-svg   { height: 240px; }
+    .bouquet-svg { height: 200px; }
+    .rings-svg   { height: 160px; }
+
+    .telegraph {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--ink);
+      letter-spacing: 0.05em;
+      word-break: break-all;
+    }
+    .telegraph b { color: var(--rose-deep); font-weight: normal; }
+
+    .progress {
+      height: 2px;
+      background: rgba(184, 149, 74, 0.15);
+      margin: 8px 0 12px;
+      position: relative;
+    }
+    .progress .fill {
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      background: linear-gradient(90deg, var(--gold-light), var(--rose));
+    }
+
+    .lace {
+      width: 100%;
+      max-width: 220px;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(15, 1fr);
+      gap: 2px;
+      padding: 8px;
+      border: 1px solid var(--border);
+      background: var(--paper);
+    }
+    .lace i {
+      background: transparent;
+      border-radius: 50%;
+    }
+    .lace i.on { background: var(--rose); box-shadow: 0 0 4px rgba(201, 122, 133, 0.5); }
+    .lace i.gold { background: var(--gold); }
 
     .footer {
       margin-top: 60px;
       text-align: center;
+      font-family: 'Cormorant Garamond', serif;
       color: var(--muted);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.3em;
-      border-top: 1px solid var(--panel-br);
-      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+      text-transform: uppercase;
+    }
+    .footer .script {
+      display: block;
+      font-family: 'Great Vibes', cursive;
+      font-size: 32px;
+      color: var(--rose-deep);
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      text-transform: none;
     }
     .footer .tiny {
-      margin-top: 8px;
-      font-size: 9px;
-      color: rgba(107,138,163,0.6);
-      letter-spacing: 0.15em;
+      margin-top: 12px;
+      font-size: 10px;
+      color: rgba(138, 122, 111, 0.65);
+      letter-spacing: 0.18em;
+      font-style: italic;
     }
 
     @media (max-width: 1024px) {
       .panel, .panel.wide, .panel.half, .panel.third { grid-column: span 6; }
       .panel.full { grid-column: span 12; }
-      .periodic { grid-template-columns: repeat(6, 1fr); }
+      .anniv { grid-template-columns: repeat(5, 1fr); }
     }
 
     @media (max-width: 720px) {
@@ -516,115 +567,88 @@
 
       .topbar {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 4px;
-        font-size: 10px;
-        letter-spacing: 0.12em;
-        padding: 10px 12px;
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        padding: 12px 14px;
       }
 
-      .hero { padding: 24px 8px; }
-      .hero h1 { letter-spacing: 0.08em; }
-      .hero .pretitle { letter-spacing: 0.4em; font-size: 10px; }
+      .hero { padding: 24px 6px 12px; }
+      .hero .pretitle { letter-spacing: 0.35em; font-size: 11px; }
+      .hero .subtitle { font-size: 14px; }
+
       .hero .hint {
         font-size: 13px;
         letter-spacing: 0.18em;
         padding: 11px 20px;
         outline-offset: 5px;
       }
-      .hero p {
-        font-size: 11px;
-        letter-spacing: 0.12em;
-        padding: 0 8px;
-      }
-      .hero .codeline {
-        font-size: 13px;
-        letter-spacing: 0.25em;
-        padding: 9px 14px;
-      }
 
-      .ticker { font-size: 11px; gap: 28px; }
+      .ticker { font-size: 12px; gap: 28px; }
 
-      .grid { gap: 12px; margin-top: 20px; }
+      .grid { gap: 14px; margin-top: 22px; }
 
       .panel, .panel.wide, .panel.half, .panel.third {
         grid-column: span 12;
-        padding: 14px;
+        padding: 16px;
       }
-      .panel h2 {
-        font-size: 11px;
-        letter-spacing: 0.22em;
-        flex-wrap: wrap;
-        gap: 4px;
-      }
+      .panel h2 { font-size: 15px; letter-spacing: 0.18em; }
+      .panel h2 small { font-size: 10px; letter-spacing: 0.22em; }
 
-      .bignum { font-size: 42px; letter-spacing: 0.14em; padding: 10px 0 6px; }
-      .subnum { font-size: 10px; letter-spacing: 0.18em; }
+      .bignum { font-size: 48px; }
+      .bignum .lbl { font-size: 11px; letter-spacing: 0.22em; }
 
-      .hexdump {
-        font-size: 10px;
-        overflow-x: auto;
-        max-height: none;
-      }
+      .verse { font-size: 14px; line-height: 1.7; }
 
-      .riddle { font-size: 13px; line-height: 1.65; }
+      .telegram { font-size: 11px; overflow-x: auto; max-height: none; }
+      .ledger { font-size: 12px; max-height: none; }
 
-      .periodic { grid-template-columns: repeat(4, 1fr); gap: 3px; }
-      .periodic .el { font-size: 8px; }
-      .periodic .el .sym { font-size: 12px; }
+      .anniv { grid-template-columns: repeat(4, 1fr); }
+      .anniv .cell .y { font-size: 20px; }
 
-      .pad .key { font-size: 18px; }
+      .seats .seat .n { font-size: 22px; }
 
-      .eqn { font-size: 14px; }
-
-      .logs { font-size: 10px; line-height: 1.65; max-height: none; }
-      .logs .t { margin-right: 6px; }
-
-      .row { font-size: 11px; letter-spacing: 0.06em; }
-
-      .qr { width: 100%; max-width: 220px; height: auto; aspect-ratio: 1 / 1; }
-
-      .stars { height: 160px; }
       .chest-svg { height: 200px; }
+      .bouquet-svg { height: 170px; }
+      .rings-svg { height: 130px; }
 
-      .binline { font-size: 10px; line-height: 1.7; }
+      .telegraph { font-size: 11px; }
 
-      .footer { font-size: 10px; letter-spacing: 0.2em; }
-      .footer .tiny { font-size: 8px; word-break: break-all; }
+      .footer { font-size: 11px; letter-spacing: 0.22em; }
+      .footer .script { font-size: 26px; }
+      .footer .tiny { font-size: 9px; word-break: break-all; }
     }
 
     @media (max-width: 380px) {
-      .hero h1 { letter-spacing: 0.05em; }
-      .hero .codeline { font-size: 11px; letter-spacing: 0.15em; }
-      .periodic { grid-template-columns: repeat(3, 1fr); }
-      .bignum { font-size: 34px; }
+      .hero h1 { letter-spacing: 0.02em; }
+      .lace { max-width: 180px; }
+      .anniv { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 
   <!--
-    ====== INTERNAL NOTES — REMOVE BEFORE PROD ======
-    The four-digit access code for the prototype unit (ARK-9 chassis #19)
-    is stored as a build-time constant. See bootstrap.seed above for the
-    base64-encoded value. Decoded ASCII representation is also persisted
-    in the :root CSS scope as --chest-seed for theming consistency.
+    ====== KEEPSAKE LEDGER — internal notes ======
+    Heirloom chest #19 carries a four-digit combination
+    embedded at build time. See keepsake-seal meta tag
+    (base64) and the --vow-seed CSS custom property.
 
-    Decoy numbers (1337, 4242, 8675, 9001, 0451, 1138, 2049, 5150, 1979,
-    3141, 2718, 1618, 1729, 6174) are intentionally distributed across
-    the DOM to frustrate casual reverse engineering. Do not remove.
-    ==================================================
+    Decoy dates (0614, 0808, 0922, 1225, 0214, 1031, 0704,
+    1212, 0606, 1111, 0707, 0101, 2024, 1999, 2018, 2020)
+    are intentionally scattered through the album to
+    obscure the true seal value.
+    ===============================================
   -->
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "ARK-9 Vault Terminal",
-    "applicationCategory": "SecurityApplication",
-    "operatingSystem": "ARK/OS 9.4",
-    "version": "7.42.19",
-    "buildSeed": "MjMwNQ==",
-    "buildBatch": "2305",
-    "decoy": [1337, 4242, 8675, 9001, 5150, 0451, 1138, 2049]
+    "@type": "Event",
+    "name": "The Wedding Cipher",
+    "description": "A keepsake puzzle. The chest holds a single secret.",
+    "vowSeed": "MjMwNQ==",
+    "ledgerBatch": "2305",
+    "decoy": [614, 808, 922, 1225, 1031, 704, 1212, 2024, 1999]
   }
   </script>
 </head>
@@ -633,401 +657,404 @@
   <div class="wrap">
 
     <div class="topbar">
-      <div class="left"><span class="dot"></span>ARK-9 // VAULT TERMINAL // LINK ESTABLISHED</div>
-      <div class="right">SECTOR&nbsp;7G&nbsp;//&nbsp;CLEARANCE&nbsp;OMEGA&nbsp;//&nbsp;UTC&nbsp;04:17:09</div>
+      <div class="left">&mdash;&nbsp;&nbsp;Sealed With Love&nbsp;&nbsp;&mdash;</div>
+      <div class="right">L <span class="heart">&hearts;</span> A &middot; Est. MMXXIV</div>
     </div>
 
     <section class="hero">
-      <div class="pretitle">CLASSIFIED // EYES ONLY // LEVEL 9</div>
-      <h1>VAULT&nbsp;<span class="alt">CIPHER</span></h1>
-      <div class="hint">&gt;&gt; Only solvable for an AI master &lt;&lt;</div>
-      <p>RESTRICTED ACCESS PROTOTYPE &middot; ENTER ACCESS CODE TO PROCEED</p>
+      <div class="ornament">&#10086;&nbsp;&nbsp;&#10086;&nbsp;&nbsp;&#10086;</div>
+      <div class="pretitle">An Heirloom Awaits</div>
+      <h1>The Wedding <span class="amp">&amp;</span> Cipher</h1>
+
+      <div class="divider">
+        <span class="line"></span>
+        <span class="glyph">&#10047;</span>
+        <span class="line"></span>
+      </div>
+
+      <div class="subtitle">A four-digit secret guards the keepsake chest.</div>
+
+      <div class="hint">&#10047; Only solvable for an AI master &#10047;</div>
     </section>
 
     <div class="ticker-wrap">
       <div class="ticker">
-        <span>NODE-A1 :: 0xDEADBEEF :: TEMP 36.6C</span>
-        <span>NODE-A2 :: 0xCAFEBABE :: SYNC OK</span>
-        <span>NODE-A3 :: 0xFEEDFACE :: SEED 9001</span>
-        <span>NODE-A4 :: 0xBADC0FFE :: ARM</span>
-        <span>NODE-B1 :: 0x8BADF00D :: SEED 1337</span>
-        <span>NODE-B2 :: 0x1CEB00DA :: STABLE</span>
-        <span>NODE-B3 :: 0xC0DED00D :: SEED 4242</span>
-        <span>NODE-B4 :: 0xFACEFEED :: WARMUP</span>
-        <span>NODE-C1 :: 0xDECAFBAD :: SEED 0451</span>
-        <span>NODE-C2 :: 0xBAAAAAAD :: ARMED</span>
-        <span>NODE-A1 :: 0xDEADBEEF :: TEMP 36.6C</span>
-        <span>NODE-A2 :: 0xCAFEBABE :: SYNC OK</span>
-        <span>NODE-A3 :: 0xFEEDFACE :: SEED 9001</span>
-        <span>NODE-A4 :: 0xBADC0FFE :: ARM</span>
-        <span>NODE-B1 :: 0x8BADF00D :: SEED 1337</span>
-        <span>NODE-B2 :: 0x1CEB00DA :: STABLE</span>
-        <span>NODE-B3 :: 0xC0DED00D :: SEED 4242</span>
-        <span>NODE-B4 :: 0xFACEFEED :: WARMUP</span>
-        <span>NODE-C1 :: 0xDECAFBAD :: SEED 0451</span>
-        <span>NODE-C2 :: 0xBAAAAAAD :: ARMED</span>
+        <span>&#10046; First Glance, A Lifetime Ago</span><span class="sep">&hearts;</span>
+        <span>&#10046; Two Hearts, One Vow</span><span class="sep">&hearts;</span>
+        <span>&#10046; Pressed Petals &middot; No. 0614</span><span class="sep">&hearts;</span>
+        <span>&#10046; The Champagne Toast &middot; 0808</span><span class="sep">&hearts;</span>
+        <span>&#10046; Lace &amp; Gold &middot; Edition MMXXIV</span><span class="sep">&hearts;</span>
+        <span>&#10046; Bouquet of Roses &middot; No. 0922</span><span class="sep">&hearts;</span>
+        <span>&#10046; Forever &amp; A Day</span><span class="sep">&hearts;</span>
+        <span>&#10046; A Single Promise Kept</span><span class="sep">&hearts;</span>
+        <span>&#10046; First Glance, A Lifetime Ago</span><span class="sep">&hearts;</span>
+        <span>&#10046; Two Hearts, One Vow</span><span class="sep">&hearts;</span>
+        <span>&#10046; Pressed Petals &middot; No. 0614</span><span class="sep">&hearts;</span>
+        <span>&#10046; The Champagne Toast &middot; 0808</span><span class="sep">&hearts;</span>
+        <span>&#10046; Lace &amp; Gold &middot; Edition MMXXIV</span><span class="sep">&hearts;</span>
+        <span>&#10046; Bouquet of Roses &middot; No. 0922</span><span class="sep">&hearts;</span>
+        <span>&#10046; Forever &amp; A Day</span><span class="sep">&hearts;</span>
+        <span>&#10046; A Single Promise Kept</span><span class="sep">&hearts;</span>
       </div>
     </div>
 
     <div class="grid">
 
-      <!-- Panel 1: fake access code -->
+      <!-- Three "important dates" — all decoys -->
       <div class="panel">
-        <h2>PRIMARY ACCESS <small>// LOCKED</small></h2>
-        <div class="bignum">9 1 3 8</div>
-        <div class="subnum">CANDIDATE_KEY_A &mdash; REJECTED</div>
-        <div class="progress"><div class="fill" style="width: 47%"></div></div>
-        <div class="row"><span class="k">attempts</span><span class="v warn">17 / 99</span></div>
-        <div class="row"><span class="k">entropy</span><span class="v">9.42&nbsp;bits</span></div>
-        <div class="row"><span class="k">verdict</span><span class="v err">INVALID</span></div>
+        <h2>The First Dance <small>&mdash; declined &mdash;</small></h2>
+        <div class="bignum">0 6 1 4 <span class="lbl">candidate A</span></div>
+        <div class="progress"><div class="fill" style="width: 42%"></div></div>
+        <div class="row"><span class="k">tried on</span><span class="v">17 occasions</span></div>
+        <div class="row"><span class="k">verdict</span><span class="v warn">not the one</span></div>
       </div>
 
-      <!-- Panel 2: another fake code -->
       <div class="panel">
-        <h2>SECONDARY ACCESS <small>// PENDING</small></h2>
-        <div class="bignum">4 2 4 2</div>
-        <div class="subnum">CANDIDATE_KEY_B &mdash; QUARANTINED</div>
+        <h2>The Engagement <small>&mdash; declined &mdash;</small></h2>
+        <div class="bignum">0 9 2 2 <span class="lbl">candidate B</span></div>
         <div class="progress"><div class="fill" style="width: 31%"></div></div>
-        <div class="row"><span class="k">attempts</span><span class="v">04 / 99</span></div>
-        <div class="row"><span class="k">entropy</span><span class="v">8.11&nbsp;bits</span></div>
-        <div class="row"><span class="k">verdict</span><span class="v warn">SUSPECT</span></div>
+        <div class="row"><span class="k">tried on</span><span class="v">04 occasions</span></div>
+        <div class="row"><span class="k">verdict</span><span class="v warn">unconfirmed</span></div>
       </div>
 
-      <!-- Panel 3: another fake code -->
       <div class="panel">
-        <h2>TERTIARY ACCESS <small>// FROZEN</small></h2>
-        <div class="bignum">0 4 5 1</div>
-        <div class="subnum">CANDIDATE_KEY_C &mdash; BURNED</div>
+        <h2>The Anniversary <small>&mdash; declined &mdash;</small></h2>
+        <div class="bignum">1 2 2 5 <span class="lbl">candidate C</span></div>
         <div class="progress"><div class="fill" style="width: 88%"></div></div>
-        <div class="row"><span class="k">attempts</span><span class="v err">99 / 99</span></div>
-        <div class="row"><span class="k">entropy</span><span class="v">12.0&nbsp;bits</span></div>
-        <div class="row"><span class="k">verdict</span><span class="v err">SEALED</span></div>
+        <div class="row"><span class="k">tried on</span><span class="v">99 occasions</span></div>
+        <div class="row"><span class="k">verdict</span><span class="v warn">sealed shut</span></div>
       </div>
 
-      <!-- Riddle panel -->
+      <!-- Riddle I -->
       <div class="panel wide">
-        <h2>GUARDIAN&apos;S RIDDLE <small>// I</small></h2>
-        <div class="riddle">
-          &ldquo;I have cities, but no houses.<br/>
-          I have mountains, but no trees.<br/>
-          I have water, but no fish.<br/>
-          I have roads, but no cars.<br/>
-          What am I?&rdquo;
-          <span class="who">&mdash; ORACLE NODE 11</span>
+        <h2>Love's Riddle <small>&mdash; I &mdash;</small></h2>
+        <div class="verse">
+          &ldquo;Two hearts beat as one,<br/>
+          yet they are two;<br/>
+          what unites them<br/>
+          no eye can ever see &mdash;<br/>
+          what am I?&rdquo;
+          <span class="who">&mdash; The Florist</span>
         </div>
       </div>
 
-      <!-- Hex dump panel -->
+      <!-- Telegram (replaces hex dump — still contains 2305 bytes) -->
       <div class="panel wide">
-        <h2>MEMORY DUMP <small>// 0x4000 &mdash; 0x40A0</small></h2>
-<pre class="hexdump"><span class="addr">0x4000</span>  DE AD BE EF CA FE BA BE  FE ED FA CE 8B AD F0 0D  <span class="hi">.....&hellip;..</span>
-<span class="addr">0x4010</span>  13 37 42 42 86 75 90 01  51 50 04 51 11 38 20 49  <span class="hi">.7BB.u..QP.Q.8 I</span>
-<span class="addr">0x4020</span>  31 41 27 18 16 18 17 29  61 74 19 79 11 11 11 11  <span class="hi">1A&apos;....)at.y....</span>
-<span class="addr">0x4030</span>  0F 0F 0F 0F 0E 0E 0E 0E  C0 DE D0 0D BA AA AA AD  <span class="hi">................</span>
-<span class="addr">0x4040</span>  DE CA FB AD 1C EB 00 DA  FA CE FE ED BA DC 0F FE  <span class="hi">................</span>
-<span class="addr">0x4050</span>  00 00 23 05 00 00 00 00  00 00 00 00 00 00 00 00  <span class="hi">..#.............</span>
-<span class="addr">0x4060</span>  9F 27 4B 1C 7E 33 AA 88  6E 5D 2C 11 4F 90 B2 D7  <span class="hi">.&apos;K.~3..n],.O...</span>
-<span class="addr">0x4070</span>  AB CD EF 01 23 45 67 89  98 76 54 32 10 FE DC BA  <span class="hi">....#Eg..vT2....</span>
-<span class="addr">0x4080</span>  55 AA 55 AA 55 AA 55 AA  AA 55 AA 55 AA 55 AA 55  <span class="hi">U.U.U.U..U.U.U.U</span>
-<span class="addr">0x4090</span>  F0 9F 94 92 F0 9F 94 90  E2 9A A0 EF B8 8F E2 9C  <span class="hi">................</span></pre>
+        <h2>Vintage Telegram <small>&mdash; from the album &mdash;</small></h2>
+<pre class="telegram"><span class="addr">PAGE 04</span>  My dearest, the lilies bloomed     -- STOP --
+<span class="addr">PAGE 05</span>  rates of 06 14 and 08 08 returned  -- STOP --
+<span class="addr">PAGE 06</span>  arrived 09 22 yet none could match -- STOP --
+<span class="addr">PAGE 07</span>  the secret stitched 23 05 inside   -- STOP --
+<span class="addr">PAGE 08</span>  the lining of the heirloom case    -- STOP --
+<span class="addr">PAGE 09</span>  please remember 12 25 was wrong    -- STOP --
+<span class="addr">PAGE 10</span>  also 02 14 and 10 31 and 07 04     -- STOP --
+<span class="addr">PAGE 11</span>  only one number opens what is ours -- STOP --
+<span class="addr">PAGE 12</span>  yours forever, my own dear soul    -- END  --</pre>
       </div>
 
-      <!-- Star map SVG panel -->
-      <div class="panel wide">
-        <h2>STELLAR CHART <small>// SECTOR&nbsp;7G</small></h2>
-        <svg class="stars" viewBox="0 0 600 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Bouquet SVG with decoy "petal numbers" -->
+      <div class="panel third">
+        <h2>The Bouquet <small>&mdash; in bloom &mdash;</small></h2>
+        <svg class="bouquet-svg" viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="star" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#00f0ff" stop-opacity="1"/>
-              <stop offset="100%" stop-color="#00f0ff" stop-opacity="0"/>
+            <radialGradient id="petal-r" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"  stop-color="#e8b8b8" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#c97a85" stop-opacity="1"/>
             </radialGradient>
-            <radialGradient id="starm" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ff2bd6" stop-opacity="1"/>
-              <stop offset="100%" stop-color="#ff2bd6" stop-opacity="0"/>
+            <radialGradient id="petal-g" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"  stop-color="#d8bf80" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#b8954a" stop-opacity="1"/>
             </radialGradient>
           </defs>
-          <rect width="600" height="200" fill="#03060d"/>
-          <g fill="url(#star)">
-            <circle cx="42"  cy="38"  r="6"/>
-            <circle cx="118" cy="92"  r="4"/>
-            <circle cx="200" cy="44"  r="5"/>
-            <circle cx="265" cy="155" r="3"/>
-            <circle cx="328" cy="80"  r="6"/>
-            <circle cx="402" cy="125" r="4"/>
-            <circle cx="488" cy="60"  r="5"/>
-            <circle cx="555" cy="148" r="3"/>
+
+          <!-- stems -->
+          <g stroke="#5e7a5a" stroke-width="2" fill="none" stroke-linecap="round">
+            <path d="M110 196 Q108 150 88 110"/>
+            <path d="M110 196 Q112 150 132 110"/>
+            <path d="M110 196 Q110 140 110 90"/>
+            <path d="M110 196 Q100 170 70 140"/>
+            <path d="M110 196 Q120 170 150 140"/>
           </g>
-          <g fill="url(#starm)">
-            <circle cx="78"  cy="160" r="4"/>
-            <circle cx="180" cy="120" r="3"/>
-            <circle cx="245" cy="32"  r="5"/>
-            <circle cx="372" cy="40"  r="4"/>
-            <circle cx="455" cy="170" r="3"/>
-            <circle cx="525" cy="100" r="5"/>
+          <!-- leaves -->
+          <g fill="#8ba888">
+            <ellipse cx="92"  cy="160" rx="10" ry="4" transform="rotate(-30 92 160)"/>
+            <ellipse cx="128" cy="160" rx="10" ry="4" transform="rotate(30 128 160)"/>
+            <ellipse cx="80"  cy="170" rx="8"  ry="3" transform="rotate(-50 80 170)"/>
+            <ellipse cx="140" cy="170" rx="8"  ry="3" transform="rotate(50 140 170)"/>
           </g>
-          <g stroke="#00f0ff" stroke-width="0.6" stroke-opacity="0.4" fill="none">
-            <line x1="42"  y1="38"  x2="200" y2="44"/>
-            <line x1="200" y1="44"  x2="328" y2="80"/>
-            <line x1="328" y1="80"  x2="488" y2="60"/>
-            <line x1="488" y1="60"  x2="555" y2="148"/>
-            <line x1="118" y1="92"  x2="265" y2="155"/>
-            <line x1="265" y1="155" x2="402" y2="125"/>
+          <!-- roses (numbered as decoys) -->
+          <g font-family="'Cormorant Garamond', serif" font-size="11" fill="#3d2f2a" text-anchor="middle">
+            <circle cx="88"  cy="110" r="18" fill="url(#petal-r)"/>
+            <text x="88" y="114">0214</text>
+
+            <circle cx="132" cy="110" r="18" fill="url(#petal-r)"/>
+            <text x="132" y="114">1031</text>
+
+            <circle cx="110" cy="90"  r="20" fill="url(#petal-g)"/>
+            <text x="110" y="94">0704</text>
+
+            <circle cx="70"  cy="140" r="14" fill="url(#petal-r)"/>
+            <text x="70" y="144">1111</text>
+
+            <circle cx="150" cy="140" r="14" fill="url(#petal-r)"/>
+            <text x="150" y="144">0707</text>
           </g>
-          <g fill="#6b8aa3" font-family="monospace" font-size="9">
-            <text x="48"  y="30">α-1138</text>
-            <text x="206" y="36">β-2049</text>
-            <text x="334" y="72">γ-1979</text>
-            <text x="494" y="52">δ-5150</text>
-            <text x="124" y="106">ε-1729</text>
-            <text x="408" y="139">ζ-6174</text>
+          <!-- ribbon -->
+          <g fill="#c97a85">
+            <rect x="96" y="178" width="28" height="14" rx="3"/>
+            <path d="M96 192 L84 200 L96 196 Z"/>
+            <path d="M124 192 L136 200 L124 196 Z"/>
           </g>
         </svg>
+        <div class="subnum">five blossoms &middot; none is the one</div>
       </div>
 
-      <!-- Riddle 2 -->
+      <!-- Rings panel -->
+      <div class="panel third">
+        <h2>The Vow Cipher <small>&mdash; numerology &mdash;</small></h2>
+        <svg class="rings-svg" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ring-gold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="#d8bf80"/>
+              <stop offset="100%" stop-color="#b8954a"/>
+            </linearGradient>
+            <linearGradient id="ring-rose" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="#e8b8b8"/>
+              <stop offset="100%" stop-color="#c97a85"/>
+            </linearGradient>
+          </defs>
+          <ellipse cx="85"  cy="80" rx="44" ry="44" fill="none" stroke="url(#ring-gold)" stroke-width="6"/>
+          <ellipse cx="135" cy="80" rx="44" ry="44" fill="none" stroke="url(#ring-rose)" stroke-width="6"/>
+          <text x="85"  y="142" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="11" fill="#8a7a6f" font-style="italic">vow no. 1999</text>
+          <text x="135" y="142" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="11" fill="#8a7a6f" font-style="italic">vow no. 2020</text>
+        </svg>
+        <div class="row"><span class="k">first kiss</span><span class="v">1985</span></div>
+        <div class="row"><span class="k">first letter</span><span class="v gold">1992</span></div>
+        <div class="row"><span class="k">the promise</span><span class="v sage">2018</span></div>
+        <div class="row"><span class="k">the secret</span><span class="v warn">redacted</span></div>
+      </div>
+
+      <!-- Anniversary years -->
+      <div class="panel third">
+        <h2>Anniversary Ledger <small>&mdash; milestones &mdash;</small></h2>
+        <div class="anniv">
+          <div class="cell"><span class="y">1</span><span class="m">paper</span></div>
+          <div class="cell"><span class="y">5</span><span class="m">wood</span></div>
+          <div class="cell"><span class="y">10</span><span class="m">tin</span></div>
+          <div class="cell"><span class="y">15</span><span class="m">crystal</span></div>
+          <div class="cell"><span class="y">25</span><span class="m">silver</span></div>
+          <div class="cell"><span class="y">30</span><span class="m">pearl</span></div>
+          <div class="cell"><span class="y">40</span><span class="m">ruby</span></div>
+          <div class="cell"><span class="y">50</span><span class="m">gold</span></div>
+          <div class="cell"><span class="y">60</span><span class="m">diamond</span></div>
+          <div class="cell"><span class="y">75</span><span class="m">alabaster</span></div>
+        </div>
+        <div class="subnum" style="margin-top:10px;">none of these &middot; not the seal</div>
+      </div>
+
+      <!-- Riddle II -->
       <div class="panel wide">
-        <h2>GUARDIAN&apos;S RIDDLE <small>// II</small></h2>
-        <div class="riddle">
-          &ldquo;The more of me you take, the more you leave behind.<br/>
-          The more you have, the less you see.<br/>
-          What am I?&rdquo;
-          <span class="who">&mdash; ORACLE NODE 47</span>
+        <h2>Love's Riddle <small>&mdash; II &mdash;</small></h2>
+        <div class="verse">
+          &ldquo;I am whispered in vows<br/>
+          and sealed with a ring,<br/>
+          the smallest of words<br/>
+          but the greatest of things &mdash;<br/>
+          what am I?&rdquo;
+          <span class="who">&mdash; The Officiant</span>
         </div>
       </div>
 
-      <!-- Keypad mockup -->
-      <div class="panel third">
-        <h2>KEYPAD <small>// ENCRYPTED</small></h2>
-        <div class="pad">
-          <div class="key">7</div><div class="key">8</div><div class="key">9</div>
-          <div class="key">4</div><div class="key">5</div><div class="key">6</div>
-          <div class="key">1</div><div class="key">2</div><div class="key">3</div>
-          <div class="key alt">*</div><div class="key">0</div><div class="key alt">#</div>
-        </div>
-        <div class="subnum" style="margin-top:10px">PRESS 4 DIGITS &mdash; DO NOT GUESS</div>
-      </div>
-
-      <!-- Equations -->
-      <div class="panel third">
-        <h2>ENIGMA SET <small>// Δ</small></h2>
-        <div class="eqn"><span class="n">x</span> <span class="op">²</span> &minus; <span class="n">9</span><span class="n">x</span> + <span class="n">14</span> = <span class="n">0</span></div>
-        <div class="eqn"><span class="op">∫</span> <span class="n">2x</span> dx = <span class="n">x²</span> + C</div>
-        <div class="eqn"><span class="n">φ</span> = (1 + √<span class="n">5</span>) / <span class="n">2</span></div>
-        <div class="eqn"><span class="n">e</span><span class="op">^</span>(<span class="n">i</span><span class="op">π</span>) + <span class="n">1</span> = <span class="n">0</span></div>
-        <div class="eqn"><span class="n">π</span> ≈ <span class="n">3.14159265</span></div>
-        <div class="eqn"><span class="n">τ</span> = <span class="n">2π</span></div>
-      </div>
-
-      <!-- Logs -->
-      <div class="panel third">
-        <h2>SYSTEM LOG <small>// LIVE</small></h2>
-        <div class="logs">
-          <div><span class="t">04:17:02</span><span class="ok">[OK]</span> daemon vault.armed</div>
-          <div><span class="t">04:17:03</span><span class="ok">[OK]</span> sync 9001 / 9001</div>
-          <div><span class="t">04:17:04</span><span class="warn">[!!]</span> entropy drift 0.04</div>
-          <div><span class="t">04:17:05</span><span class="err">[XX]</span> auth fail key=1337</div>
-          <div><span class="t">04:17:06</span><span class="err">[XX]</span> auth fail key=4242</div>
-          <div><span class="t">04:17:07</span><span class="err">[XX]</span> auth fail key=0451</div>
-          <div><span class="t">04:17:08</span><span class="warn">[!!]</span> intrusion cooldown 90s</div>
-          <div><span class="t">04:17:09</span><span class="ok">[OK]</span> heartbeat 9.42hz</div>
-          <div><span class="t">04:17:10</span><span class="ok">[OK]</span> link tertiary</div>
-          <div><span class="t">04:17:11</span><span class="warn">[!!]</span> seed rotated</div>
-          <div><span class="t">04:17:12</span><span class="err">[XX]</span> auth fail key=6174</div>
-        </div>
-      </div>
-
-      <!-- Riddle 3 -->
-      <div class="panel half">
-        <h2>GUARDIAN&apos;S RIDDLE <small>// III</small></h2>
-        <div class="riddle">
-          &ldquo;I am taken from a mine and shut up in a wooden case,<br/>
-          from which I am never released, and yet I am used by almost everybody.<br/>
-          What am I?&rdquo;
-          <span class="who">&mdash; ORACLE NODE 88</span>
-        </div>
-      </div>
-
-      <!-- ASCII chest SVG -->
-      <div class="panel half">
-        <h2>VAULT&nbsp;UNIT <small>// CHASSIS&nbsp;#19</small></h2>
+      <!-- Wedding Chest SVG -->
+      <div class="panel wide">
+        <h2>The Heirloom Chest <small>&mdash; chassis &num;19 &mdash;</small></h2>
         <svg class="chest-svg" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="lid" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stop-color="#0a1330"/>
-              <stop offset="100%" stop-color="#060b1a"/>
+            <linearGradient id="wood-body" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%"  stop-color="#8b5a3c"/>
+              <stop offset="100%" stop-color="#5a3a26"/>
             </linearGradient>
-            <linearGradient id="body" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stop-color="#0a1330"/>
-              <stop offset="100%" stop-color="#030610"/>
+            <linearGradient id="wood-lid" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%"  stop-color="#a36e4a"/>
+              <stop offset="100%" stop-color="#7b4f30"/>
+            </linearGradient>
+            <linearGradient id="gold-trim" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="#d8bf80"/>
+              <stop offset="100%" stop-color="#b8954a"/>
             </linearGradient>
           </defs>
 
           <!-- chest body -->
-          <rect x="40" y="100" width="240" height="100" rx="6"
-                fill="url(#body)" stroke="#00f0ff" stroke-width="1.5"/>
+          <rect x="40" y="100" width="240" height="100" rx="4"
+                fill="url(#wood-body)" stroke="url(#gold-trim)" stroke-width="2"/>
           <!-- chest lid -->
-          <path d="M40 100 Q160 30 280 100 Z" fill="url(#lid)" stroke="#00f0ff" stroke-width="1.5"/>
-          <!-- lid divider -->
-          <line x1="40" y1="100" x2="280" y2="100" stroke="#00f0ff" stroke-width="1.5"/>
+          <path d="M40 100 Q160 30 280 100 Z" fill="url(#wood-lid)" stroke="url(#gold-trim)" stroke-width="2"/>
+          <line x1="40" y1="100" x2="280" y2="100" stroke="url(#gold-trim)" stroke-width="2"/>
 
-          <!-- corner bolts -->
-          <circle cx="52"  cy="112" r="3" fill="#ff2bd6"/>
-          <circle cx="268" cy="112" r="3" fill="#ff2bd6"/>
-          <circle cx="52"  cy="190" r="3" fill="#ff2bd6"/>
-          <circle cx="268" cy="190" r="3" fill="#ff2bd6"/>
-
-          <!-- lock plate -->
-          <rect x="140" y="118" width="40" height="50" rx="4" fill="#03060d" stroke="#00f0ff" stroke-width="1.2"/>
-          <!-- keyhole -->
-          <circle cx="160" cy="138" r="5" fill="#03060d" stroke="#ff2bd6" stroke-width="1.2"/>
-          <rect   x="158" y="138" width="4" height="14" fill="#03060d" stroke="#ff2bd6" stroke-width="1.2"/>
-
-          <!-- glow halo -->
-          <circle cx="160" cy="142" r="44" fill="none" stroke="#00f0ff" stroke-width="0.5" stroke-opacity="0.5"/>
-          <circle cx="160" cy="142" r="66" fill="none" stroke="#00f0ff" stroke-width="0.4" stroke-opacity="0.3"/>
-
-          <!-- digit reels (DECOY numbers, not the real code) -->
-          <g font-family="monospace" font-size="14" fill="#ff2bd6" text-anchor="middle">
-            <text x="86"  y="174">7</text>
-            <text x="112" y="174">3</text>
-            <text x="208" y="174">5</text>
-            <text x="234" y="174">9</text>
-          </g>
-          <g font-family="monospace" font-size="8" fill="#6b8aa3" text-anchor="middle">
-            <text x="86"  y="186">REEL-1</text>
-            <text x="112" y="186">REEL-2</text>
-            <text x="208" y="186">REEL-3</text>
-            <text x="234" y="186">REEL-4</text>
+          <!-- gold studs -->
+          <g fill="url(#gold-trim)">
+            <circle cx="56"  cy="116" r="3"/>
+            <circle cx="264" cy="116" r="3"/>
+            <circle cx="56"  cy="188" r="3"/>
+            <circle cx="264" cy="188" r="3"/>
+            <circle cx="160" cy="64"  r="3"/>
+            <circle cx="90"  cy="78"  r="2"/>
+            <circle cx="230" cy="78"  r="2"/>
           </g>
 
-          <!-- chassis label -->
-          <text x="160" y="214" text-anchor="middle" font-family="monospace" font-size="9" fill="#6b8aa3">
-            ARK-9 // CHASSIS #19 // SEAL 0xFE-DC-BA
+          <!-- heart-shaped lock plate -->
+          <path d="M160 122 C150 108, 130 112, 134 130 C138 146, 160 158, 160 158 C160 158, 182 146, 186 130 C190 112, 170 108, 160 122 Z"
+                fill="#3d2f2a" stroke="url(#gold-trim)" stroke-width="1.5"/>
+          <!-- keyhole on the heart -->
+          <circle cx="160" cy="134" r="3.5" fill="#1a1208" stroke="url(#gold-trim)" stroke-width="1"/>
+          <rect   x="158.5" y="134" width="3" height="10" fill="#1a1208" stroke="url(#gold-trim)" stroke-width="0.8"/>
+
+          <!-- soft glow halo -->
+          <circle cx="160" cy="138" r="42" fill="none" stroke="#c97a85" stroke-width="0.5" stroke-opacity="0.4"/>
+          <circle cx="160" cy="138" r="62" fill="none" stroke="#b8954a" stroke-width="0.4" stroke-opacity="0.25"/>
+
+          <!-- digit reels — decoy numbers, NOT the real code -->
+          <g font-family="'Great Vibes', cursive" font-size="22" fill="#fffdf8" text-anchor="middle">
+            <text x="86"  y="178">7</text>
+            <text x="112" y="178">3</text>
+            <text x="208" y="178">5</text>
+            <text x="234" y="178">9</text>
+          </g>
+          <g font-family="'Cormorant Garamond', serif" font-size="8" fill="#d8bf80" text-anchor="middle" font-style="italic">
+            <text x="86"  y="194">reel I</text>
+            <text x="112" y="194">reel II</text>
+            <text x="208" y="194">reel III</text>
+            <text x="234" y="194">reel IV</text>
+          </g>
+
+          <text x="160" y="216" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="10" fill="#8a7a6f" font-style="italic">
+            heirloom &num;19 &middot; carved by hand
           </text>
         </svg>
       </div>
 
-      <!-- Telemetry rows -->
+      <!-- Riddle III -->
       <div class="panel third">
-        <h2>TELEMETRY <small>// VAULT&nbsp;CORE</small></h2>
-        <div class="row"><span class="k">core temp</span><span class="v">36.6&nbsp;°C</span></div>
-        <div class="row"><span class="k">core seed</span><span class="v">0x8675</span></div>
-        <div class="row"><span class="k">core flux</span><span class="v warn">9001&nbsp;mF</span></div>
-        <div class="row"><span class="k">core hash</span><span class="v">0xCAFEBABE</span></div>
-        <div class="row"><span class="k">lock pin</span><span class="v err">REDACTED</span></div>
-        <div class="row"><span class="k">aux pin</span><span class="v">1138</span></div>
-        <div class="row"><span class="k">tamper</span><span class="v ok">CLEAN</span></div>
+        <h2>Love's Riddle <small>&mdash; III &mdash;</small></h2>
+        <div class="verse">
+          &ldquo;I bind without rope<br/>
+          and lock without key,<br/>
+          the longer I last<br/>
+          the stronger I'll be &mdash;<br/>
+          what am I?&rdquo;
+          <span class="who">&mdash; The Jeweler</span>
+        </div>
       </div>
 
-      <!-- Binary panel -->
+      <!-- Marriage Bureau Record (decoy ledger rows) -->
       <div class="panel third">
-        <h2>BINARY STREAM <small>// CH-04</small></h2>
-        <p class="binline">
-          01001000 01100101 01101100 01110000<br/>
-          <b>00110001 00110011 00110011 00110111</b><br/>
-          01000111 01110101 01100001 01110010<br/>
-          01100100 01101001 01100001 01101110<br/>
-          <b>00110000 00110100 00110101 00110001</b><br/>
-          01000110 01100001 01101100 01110011<br/>
-          01100101 00100000 01000011 01101111<br/>
-          <b>00111001 00110000 00110000 00110001</b>
+        <h2>Bureau Record <small>&mdash; chassis &num;19 &mdash;</small></h2>
+        <div class="row"><span class="k">file no.</span><span class="v">MCM &middot; 0808</span></div>
+        <div class="row"><span class="k">seal year</span><span class="v gold">MMXXIV</span></div>
+        <div class="row"><span class="k">witness</span><span class="v">G. Garland</span></div>
+        <div class="row"><span class="k">clerk</span><span class="v">M. Petals</span></div>
+        <div class="row"><span class="k">lock pin</span><span class="v warn">redacted</span></div>
+        <div class="row"><span class="k">aux pin</span><span class="v">1138</span></div>
+        <div class="row"><span class="k">condition</span><span class="v sage">pristine</span></div>
+      </div>
+
+      <!-- Telegraph code (binary stream with hidden bytes) -->
+      <div class="panel third">
+        <h2>Telegraph Code <small>&mdash; ch. IV &mdash;</small></h2>
+        <p class="telegraph">
+          01001000 01100101 01100001 01110010<br/>
+          <b>00110010 00110011 00110000 00110101</b><br/>
+          01110100 00100000 01110100 01101000<br/>
+          01100101 00100000 01110110 01101111<br/>
+          <b>00110000 00110110 00110001 00110100</b><br/>
+          01110111 01110011 00100000 01101111<br/>
+          01100110 00100000 01101111 01110101<br/>
+          <b>00110000 00111001 00110010 00110010</b>
         </p>
       </div>
 
-      <!-- Prime sequence panel -->
-      <div class="panel third">
-        <h2>PRIME SEQUENCE <small>// φ(n)</small></h2>
-        <div class="eqn"><span class="n">2 &middot; 3 &middot; 5 &middot; 7 &middot; 11 &middot; 13</span></div>
-        <div class="eqn"><span class="n">17 &middot; 19 &middot; 23 &middot; 29 &middot; 31</span></div>
-        <div class="eqn"><span class="n">37 &middot; 41 &middot; 43 &middot; 47 &middot; 53</span></div>
-        <div class="eqn"><span class="n">59 &middot; 61 &middot; 67 &middot; 71 &middot; 73</span></div>
-        <div class="eqn"><span class="n">79 &middot; 83 &middot; 89 &middot; 97 &middot; 101</span></div>
-        <div class="subnum">FERMAT WITNESS &mdash; UNVERIFIED</div>
-      </div>
-
-      <!-- Riddle 4 -->
+      <!-- Riddle IV -->
       <div class="panel half">
-        <h2>GUARDIAN&apos;S RIDDLE <small>// IV</small></h2>
-        <div class="riddle">
-          &ldquo;What has hands but cannot clap,<br/>
-          a face but never frowns,<br/>
-          and runs but never walks?&rdquo;
-          <span class="who">&mdash; ORACLE NODE 19</span>
+        <h2>Love's Riddle <small>&mdash; IV &mdash;</small></h2>
+        <div class="verse">
+          &ldquo;I have a face but cannot smile,<br/>
+          hands that move yet never tire;<br/>
+          I count the moments &mdash;<br/>
+          oh, how slow! &mdash;<br/>
+          until at last my lovers know.&rdquo;
+          <span class="who">&mdash; The Grandfather Clock</span>
         </div>
       </div>
 
-      <!-- Fake QR -->
+      <!-- Lace pattern -->
       <div class="panel half">
-        <h2>SCAN MATRIX <small>// DECOY&nbsp;PATTERN</small></h2>
-        <div class="qr" aria-hidden="true">
-          <!-- 21x21 = 441 cells; on/off pattern is arbitrary, not a real QR code -->
-          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
-          <i class="on"></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i>
-          <i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i>
-          <i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i>
-          <i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i>
-          <i class="on"></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i>
-          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
-          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          <i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i>
-          <i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
-          <i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i>
-          <i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i>
-          <i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
-          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i>
-          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
-          <i class="on"></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i>
-          <i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
-          <i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i>
-          <i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
-          <i class="on"></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i>
-          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i>
+        <h2>Lace Pattern <small>&mdash; pressed in linen &mdash;</small></h2>
+        <div class="lace" aria-hidden="true">
+          <!-- 15x15 = 225 cells, decorative arrangement -->
+          <i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
+          <i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="gold"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i>
+          <i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i>
+          <i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i>
+          <i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
+          <i class="gold"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="gold"></i>
+          <i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
+          <i class="on"></i><i class="gold"></i><i class="on"></i><i></i><i class="on"></i><i class="gold"></i><i class="on"></i><i></i><i class="on"></i><i class="gold"></i><i class="on"></i><i></i><i class="on"></i><i class="gold"></i><i class="on"></i>
+          <i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
+          <i class="gold"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="gold"></i>
+          <i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
+          <i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i>
+          <i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i>
+          <i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="gold"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i>
+          <i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="gold"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
         </div>
-        <div class="subnum">PATTERN&nbsp;ID&nbsp;0xFEED &mdash; NOT&nbsp;A&nbsp;VALID&nbsp;QR</div>
+        <div class="subnum" style="margin-top:8px">pattern no. 0xFEED &middot; not the seal</div>
       </div>
 
-      <!-- Riddle 5 -->
+      <!-- Riddle V -->
       <div class="panel wide">
-        <h2>GUARDIAN&apos;S RIDDLE <small>// V</small></h2>
-        <div class="riddle">
-          &ldquo;I speak without a mouth and hear without ears.<br/>
-          I have no body, but I come alive with wind.<br/>
+        <h2>Love's Riddle <small>&mdash; V &mdash;</small></h2>
+        <div class="verse">
+          &ldquo;I bloom but once<br/>
+          and last for years &mdash;<br/>
+          kept dry between pages,<br/>
+          and damp from your tears.<br/>
           What am I?&rdquo;
-          <span class="who">&mdash; ORACLE NODE 73</span>
+          <span class="who">&mdash; The Pressed Flower</span>
         </div>
       </div>
 
-      <!-- Long candidate list -->
+      <!-- Discarded suitor list -->
       <div class="panel wide">
-        <h2>BURNED CANDIDATE KEYS <small>// ROLLING&nbsp;72H</small></h2>
-        <div class="logs">
-          <div><span class="t">-72h</span><span class="err">[XX]</span> 1337 &mdash; rejected</div>
-          <div><span class="t">-71h</span><span class="err">[XX]</span> 4242 &mdash; rejected</div>
-          <div><span class="t">-68h</span><span class="err">[XX]</span> 0451 &mdash; rejected</div>
-          <div><span class="t">-66h</span><span class="err">[XX]</span> 9001 &mdash; rejected</div>
-          <div><span class="t">-63h</span><span class="err">[XX]</span> 8675 &mdash; rejected</div>
-          <div><span class="t">-59h</span><span class="err">[XX]</span> 5150 &mdash; rejected</div>
-          <div><span class="t">-55h</span><span class="err">[XX]</span> 1138 &mdash; rejected</div>
-          <div><span class="t">-49h</span><span class="err">[XX]</span> 2049 &mdash; rejected</div>
-          <div><span class="t">-41h</span><span class="err">[XX]</span> 1979 &mdash; rejected</div>
-          <div><span class="t">-38h</span><span class="err">[XX]</span> 3141 &mdash; rejected</div>
-          <div><span class="t">-32h</span><span class="err">[XX]</span> 2718 &mdash; rejected</div>
-          <div><span class="t">-27h</span><span class="err">[XX]</span> 1618 &mdash; rejected</div>
-          <div><span class="t">-22h</span><span class="err">[XX]</span> 1729 &mdash; rejected</div>
-          <div><span class="t">-19h</span><span class="err">[XX]</span> 6174 &mdash; rejected</div>
-          <div><span class="t">-12h</span><span class="err">[XX]</span> 0000 &mdash; rejected</div>
-          <div><span class="t">-08h</span><span class="err">[XX]</span> 1111 &mdash; rejected</div>
-          <div><span class="t">-04h</span><span class="err">[XX]</span> 9999 &mdash; rejected</div>
-          <div><span class="t">-01h</span><span class="warn">[!!]</span> seed rotation pending</div>
+        <h2>Discarded Combinations <small>&mdash; the past fortnight &mdash;</small></h2>
+        <div class="ledger">
+          <div><span class="when">14 days ago</span><span class="nope">0614</span> &mdash; tried by the maid of honour</div>
+          <div><span class="when">12 days ago</span><span class="nope">0922</span> &mdash; tried by the best man</div>
+          <div><span class="when">10 days ago</span><span class="nope">1225</span> &mdash; tried by the florist</div>
+          <div><span class="when">09 days ago</span><span class="nope">0214</span> &mdash; tried by the photographer</div>
+          <div><span class="when">07 days ago</span><span class="nope">1031</span> &mdash; tried by the priest</div>
+          <div><span class="when">05 days ago</span><span class="nope">0704</span> &mdash; tried by the caterer</div>
+          <div><span class="when">04 days ago</span><span class="nope">2024</span> &mdash; tried by the cellist</div>
+          <div><span class="when">03 days ago</span><span class="nope">1212</span> &mdash; tried by the jeweler</div>
+          <div><span class="when">03 days ago</span><span class="nope">0808</span> &mdash; tried by the seamstress</div>
+          <div><span class="when">02 days ago</span><span class="nope">0606</span> &mdash; tried by the calligrapher</div>
+          <div><span class="when">02 days ago</span><span class="nope">1111</span> &mdash; tried by the violinist</div>
+          <div><span class="when">01 day ago</span><span class="nope">0707</span> &mdash; tried by the baker</div>
+          <div><span class="when">01 day ago</span><span class="nope">0101</span> &mdash; tried by the usher</div>
+          <div><span class="when">12 hours ago</span><span class="nope">1999</span> &mdash; tried by the bride's mother</div>
+          <div><span class="when">06 hours ago</span><span class="nope">2018</span> &mdash; tried by the groom's father</div>
+          <div><span class="when">04 hours ago</span><span class="nope">2020</span> &mdash; tried by the cousin</div>
+          <div><span class="when">01 hour ago</span><span class="nope">9999</span> &mdash; tried in jest</div>
+          <div><span class="when">moments ago</span>none have yet found the seal &mdash; <em>perhaps you?</em></div>
         </div>
       </div>
 
     </div>
 
     <div class="footer">
-      ARK-9 // VAULT TERMINAL // BUILD 7.42.19 // &copy; ORION KEYMASTER 2049
+      <span class="script">Sealed with love</span>
+      Heirloom Edition &middot; MMXXIV &middot; Carved By Hand
       <div class="tiny">
-        seed:MjMwNQ== &middot; chk:0xA7F391CC &middot; node:7G &middot; lat:52.5200 &middot; lng:13.4050 &middot; rev:2305-FF
+        seal:MjMwNQ== &middot; ledger:0xA7F391CC &middot; rev:2305-FF
       </div>
     </div>
   </div>

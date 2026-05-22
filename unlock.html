@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UNLOCK // ARK-9</title>
+  <style>
+    :root {
+      --bg-0: #03060d;
+      --bg-1: #060b1a;
+      --neon-cyan: #00f0ff;
+      --neon-mag:  #ff2bd6;
+      --neon-grn:  #39ff14;
+      --text:      #d6f6ff;
+      --muted:     #6b8aa3;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-0);
+      color: var(--text);
+      font-family: 'Share Tech Mono', 'Consolas', 'Menlo', monospace;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(0,240,255,0.15), transparent 60%),
+        radial-gradient(ellipse at 70% 80%, rgba(255,43,214,0.15), transparent 60%),
+        linear-gradient(180deg, var(--bg-0), var(--bg-1));
+      padding: 24px;
+    }
+
+    /* scanlines */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,240,255,0.03) 3px,
+        rgba(0,0,0,0) 4px
+      );
+      pointer-events: none;
+    }
+
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 8px var(--neon-cyan), 0 0 22px rgba(0,240,255,0.6); }
+      50%      { text-shadow: 0 0 14px var(--neon-cyan), 0 0 38px rgba(0,240,255,0.9); }
+    }
+    @keyframes blink {
+      0%, 60%  { opacity: 1; }
+      61%,100% { opacity: 0.3; }
+    }
+
+    .card {
+      position: relative;
+      width: 360px;
+      max-width: 100%;
+      background: rgba(8, 18, 36, 0.85);
+      border: 1px solid var(--neon-cyan);
+      padding: 22px;
+      box-shadow:
+        0 0 24px rgba(0,240,255,0.3),
+        inset 0 0 18px rgba(0,240,255,0.06);
+      backdrop-filter: blur(6px);
+    }
+
+    /* four corner brackets */
+    .card::before, .card::after, .card .bl, .card .br {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-color: var(--neon-mag);
+      border-style: solid;
+      filter: drop-shadow(0 0 6px rgba(255,43,214,0.8));
+    }
+    .card::before { top: -6px; left: -6px;  border-width: 2px 0 0 2px; }
+    .card::after  { top: -6px; right: -6px; border-width: 2px 2px 0 0; }
+    .card .bl     { bottom: -6px; left: -6px;  border-width: 0 0 2px 2px; }
+    .card .br     { bottom: -6px; right: -6px; border-width: 0 2px 2px 0; }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed rgba(0,240,255,0.25);
+    }
+    .top .l { color: var(--neon-cyan); }
+    .top .r { color: var(--neon-mag); }
+    .top .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--neon-grn);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--neon-grn);
+      margin-right: 6px;
+      vertical-align: middle;
+      animation: blink 1.4s infinite;
+    }
+
+    h1 {
+      font-family: 'Orbitron', 'Share Tech Mono', monospace;
+      font-size: 52px;
+      letter-spacing: 0.28em;
+      color: var(--neon-cyan);
+      text-align: center;
+      margin: 18px 0 4px;
+      animation: glow 3.4s ease-in-out infinite;
+    }
+    .sub {
+      text-align: center;
+      color: var(--neon-mag);
+      letter-spacing: 0.4em;
+      font-size: 10px;
+      margin-bottom: 18px;
+      text-shadow: 0 0 6px rgba(255,43,214,0.6);
+    }
+
+    .qr-frame {
+      background: #ffffff;
+      padding: 12px;
+      border: 1px solid var(--neon-cyan);
+      box-shadow:
+        0 0 18px rgba(0,240,255,0.35),
+        inset 0 0 0 1px #fff;
+      display: flex;
+      justify-content: center;
+    }
+    .qr-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 280px;
+    }
+
+    .url {
+      text-align: center;
+      margin: 14px 0 4px;
+      color: var(--neon-cyan);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      word-break: break-all;
+      text-shadow: 0 0 6px rgba(0,240,255,0.6);
+    }
+
+    .foot {
+      text-align: center;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(0,240,255,0.25);
+    }
+
+    @media (max-width: 420px) {
+      .card { padding: 18px; }
+      h1 { font-size: 40px; letter-spacing: 0.2em; }
+      .sub { letter-spacing: 0.3em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="bl"></span>
+    <span class="br"></span>
+
+    <div class="top">
+      <div class="l"><span class="dot"></span>ARK-9 // LINK</div>
+      <div class="r">SECTOR&nbsp;7G</div>
+    </div>
+
+    <h1>UNLOCK</h1>
+    <div class="sub">&gt; SCAN&nbsp;TO&nbsp;BEGIN &lt;</div>
+
+    <div class="qr-frame">
+      <img
+        src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=0&qzone=1&format=svg&data=https%3A%2F%2Flasseprogramming.github.io%2Fwedding%2F"
+        alt="QR code for https://lasseprogramming.github.io/wedding/"
+      />
+    </div>
+
+    <div class="url">lasseprogramming.github.io/wedding</div>
+    <div class="foot">SOLVE&nbsp;THE&nbsp;CIPHER &middot; FIND&nbsp;THE&nbsp;KEY</div>
+  </div>
+</body>
+</html>
