@@ -3,16 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>UNLOCK // ARK-9</title>
+  <title>Unlock &middot; The Wedding Cipher</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
   <style>
+    @page {
+      size: 12cm 12cm;
+      margin: 0;
+    }
+
     :root {
-      --bg-0: #03060d;
-      --bg-1: #060b1a;
-      --neon-cyan: #00f0ff;
-      --neon-mag:  #ff2bd6;
-      --neon-grn:  #39ff14;
-      --text:      #d6f6ff;
-      --muted:     #6b8aa3;
+      --bg-0:        #faf6f1;
+      --bg-1:        #f3e9dc;
+      --paper:       #fffdf8;
+      --rose:        #c97a85;
+      --rose-deep:   #8b3a4a;
+      --blush:       #e8b8b8;
+      --gold:        #b8954a;
+      --gold-light:  #d8bf80;
+      --sage:        #8ba888;
+      --ink:         #3d2f2a;
+      --muted:       #8a7a6f;
+      --border:      rgba(184, 149, 74, 0.35);
+      --border-soft: rgba(184, 149, 74, 0.20);
     }
 
     * { box-sizing: border-box; }
@@ -21,8 +37,8 @@
       margin: 0;
       padding: 0;
       background: var(--bg-0);
-      color: var(--text);
-      font-family: 'Share Tech Mono', 'Consolas', 'Menlo', monospace;
+      color: var(--ink);
+      font-family: 'Lora', 'Georgia', serif;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -31,170 +47,277 @@
 
     body {
       background:
-        radial-gradient(ellipse at 30% 20%, rgba(0,240,255,0.15), transparent 60%),
-        radial-gradient(ellipse at 70% 80%, rgba(255,43,214,0.15), transparent 60%),
+        radial-gradient(ellipse at 30% 20%, rgba(232, 184, 184, 0.50), transparent 60%),
+        radial-gradient(ellipse at 70% 80%, rgba(184, 149, 74, 0.22), transparent 60%),
         linear-gradient(180deg, var(--bg-0), var(--bg-1));
-      padding: 24px;
+      padding: 16px;
     }
 
-    /* scanlines */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(0,0,0,0) 0px,
-        rgba(0,0,0,0) 2px,
-        rgba(0,240,255,0.03) 3px,
-        rgba(0,0,0,0) 4px
-      );
-      pointer-events: none;
+    @keyframes shimmer {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.55; }
+    }
+    @keyframes glow-soft {
+      0%, 100% {
+        text-shadow: 0 0 4px rgba(139, 58, 74, 0.25),
+                     0 0 14px rgba(184, 149, 74, 0.15);
+      }
+      50% {
+        text-shadow: 0 0 8px rgba(139, 58, 74, 0.4),
+                     0 0 22px rgba(184, 149, 74, 0.3);
+      }
     }
 
-    @keyframes glow {
-      0%, 100% { text-shadow: 0 0 8px var(--neon-cyan), 0 0 22px rgba(0,240,255,0.6); }
-      50%      { text-shadow: 0 0 14px var(--neon-cyan), 0 0 38px rgba(0,240,255,0.9); }
-    }
-    @keyframes blink {
-      0%, 60%  { opacity: 1; }
-      61%,100% { opacity: 0.3; }
-    }
-
+    /* ---------- 12x12 cm card ---------- */
     .card {
       position: relative;
-      width: 360px;
-      max-width: 100%;
-      background: rgba(8, 18, 36, 0.85);
-      border: 1px solid var(--neon-cyan);
-      padding: 22px;
+      width: 12cm;
+      height: 12cm;
+      padding: 0.5cm 0.55cm;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
       box-shadow:
-        0 0 24px rgba(0,240,255,0.3),
-        inset 0 0 18px rgba(0,240,255,0.06);
-      backdrop-filter: blur(6px);
+        0 2px 0 rgba(184, 149, 74, 0.18),
+        0 12px 36px rgba(139, 58, 74, 0.10);
+      overflow: hidden;
     }
 
-    /* four corner brackets */
-    .card::before, .card::after, .card .bl, .card .br {
+    /* paper grain inside the card */
+    .card::after {
       content: "";
       position: absolute;
-      width: 18px;
-      height: 18px;
-      border-color: var(--neon-mag);
-      border-style: solid;
-      filter: drop-shadow(0 0 6px rgba(255,43,214,0.8));
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 25% 35%, rgba(184,149,74,0.06) 0 1px, transparent 2px),
+        radial-gradient(circle at 75% 65%, rgba(139, 58, 74,0.05) 0 1px, transparent 2px);
+      background-size: 60px 60px, 80px 80px;
+      pointer-events: none;
+      z-index: 0;
     }
-    .card::before { top: -6px; left: -6px;  border-width: 2px 0 0 2px; }
-    .card::after  { top: -6px; right: -6px; border-width: 2px 2px 0 0; }
-    .card .bl     { bottom: -6px; left: -6px;  border-width: 0 0 2px 2px; }
-    .card .br     { bottom: -6px; right: -6px; border-width: 0 2px 2px 0; }
+
+    /* gold inner corner flourishes */
+    .gc {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.85;
+      z-index: 3;
+    }
+    .gc.tl { top: 5px;    left: 5px;    border-width: 1px 0 0 1px; }
+    .gc.tr { top: 5px;    right: 5px;   border-width: 1px 1px 0 0; }
+    .gc.bl { bottom: 5px; left: 5px;    border-width: 0 0 1px 1px; }
+    .gc.br { bottom: 5px; right: 5px;   border-width: 0 1px 1px 0; }
+
+    /* outer rose corner brackets */
+    .card::before {
+      /* not used; using spans .rb .rt for outer */
+      content: none;
+    }
+    .rcb {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-color: var(--rose-deep);
+      border-style: solid;
+      filter: drop-shadow(0 0 4px rgba(139, 58, 74, 0.35));
+      z-index: 4;
+    }
+    .rcb.tl { top: -5px;    left: -5px;    border-width: 2px 0 0 2px; }
+    .rcb.tr { top: -5px;    right: -5px;   border-width: 2px 2px 0 0; }
+    .rcb.bl { bottom: -5px; left: -5px;    border-width: 0 0 2px 2px; }
+    .rcb.br { bottom: -5px; right: -5px;   border-width: 0 2px 2px 0; }
+
+    .inner {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
     .top {
       display: flex;
       justify-content: space-between;
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      padding-bottom: 8px;
-      border-bottom: 1px dashed rgba(0,240,255,0.25);
+      align-items: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 9.5pt;
+      letter-spacing: 0.18em;
+      padding-bottom: 4px;
+      border-bottom: 1px dotted var(--border-soft);
+      text-transform: uppercase;
     }
-    .top .l { color: var(--neon-cyan); }
-    .top .r { color: var(--neon-mag); }
-    .top .dot {
+    .top .l { color: var(--rose-deep); }
+    .top .r { color: var(--gold); }
+    .top .heart {
+      color: var(--rose);
+      margin: 0 4px;
       display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: var(--neon-grn);
-      border-radius: 50%;
-      box-shadow: 0 0 6px var(--neon-grn);
-      margin-right: 6px;
-      vertical-align: middle;
-      animation: blink 1.4s infinite;
+      animation: shimmer 2.2s infinite;
+    }
+
+    .ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 11pt;
+      letter-spacing: 0.35em;
+      margin: 6px 0 0;
     }
 
     h1 {
-      font-family: 'Orbitron', 'Share Tech Mono', monospace;
-      font-size: 52px;
-      letter-spacing: 0.28em;
-      color: var(--neon-cyan);
+      font-family: 'Great Vibes', cursive;
+      font-size: 44pt;
+      letter-spacing: 0.02em;
+      color: var(--rose-deep);
       text-align: center;
-      margin: 18px 0 4px;
-      animation: glow 3.4s ease-in-out infinite;
+      margin: 2px 0 0;
+      line-height: 1;
+      font-weight: 400;
+      animation: glow-soft 3.4s ease-in-out infinite;
     }
+
     .sub {
       text-align: center;
-      color: var(--neon-mag);
-      letter-spacing: 0.4em;
-      font-size: 10px;
-      margin-bottom: 18px;
-      text-shadow: 0 0 6px rgba(255,43,214,0.6);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--ink);
+      font-size: 10pt;
+      letter-spacing: 0.1em;
+      margin-top: 2px;
     }
+
+    .divider {
+      width: 65%;
+      margin: 6px auto 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+    }
+    .divider .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .divider .glyph { font-size: 10pt; letter-spacing: 0.3em; }
 
     .qr-frame {
       background: #ffffff;
-      padding: 12px;
-      border: 1px solid var(--neon-cyan);
+      padding: 5px;
+      border: 1px solid var(--gold);
       box-shadow:
-        0 0 18px rgba(0,240,255,0.35),
+        0 0 14px rgba(184, 149, 74, 0.25),
         inset 0 0 0 1px #fff;
       display: flex;
       justify-content: center;
+      position: relative;
+      margin: 0 auto;
+      width: 5cm;
+      height: 5cm;
     }
+    .qr-frame::before,
+    .qr-frame::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-color: var(--rose);
+      border-style: solid;
+    }
+    .qr-frame::before { top: -1px; left: -1px;    border-width: 1px 0 0 1px; }
+    .qr-frame::after  { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
     .qr-frame img {
       display: block;
       width: 100%;
-      height: auto;
-      max-width: 280px;
+      height: 100%;
     }
 
     .url {
       text-align: center;
-      margin: 14px 0 4px;
-      color: var(--neon-cyan);
-      font-size: 12px;
-      letter-spacing: 0.12em;
+      margin: 6px 0 0;
+      color: var(--rose-deep);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10pt;
+      letter-spacing: 0.08em;
       word-break: break-all;
-      text-shadow: 0 0 6px rgba(0,240,255,0.6);
+      font-style: italic;
     }
 
     .foot {
       text-align: center;
+      font-family: 'Cormorant Garamond', serif;
       color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 0.32em;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px dashed rgba(0,240,255,0.25);
+      font-size: 8pt;
+      letter-spacing: 0.22em;
+      margin-top: auto;
+      padding-top: 5px;
+      border-top: 1px dotted var(--border-soft);
+      text-transform: uppercase;
+    }
+    .foot .script {
+      display: block;
+      font-family: 'Great Vibes', cursive;
+      font-size: 16pt;
+      color: var(--rose-deep);
+      letter-spacing: 0.03em;
+      margin-bottom: 2px;
+      text-transform: none;
+      line-height: 1.1;
     }
 
-    @media (max-width: 420px) {
-      .card { padding: 18px; }
-      h1 { font-size: 40px; letter-spacing: 0.2em; }
-      .sub { letter-spacing: 0.3em; }
+    /* ensure print/export captures only the card at 12x12 */
+    @media print {
+      html, body {
+        background: #fff;
+        padding: 0;
+        margin: 0;
+      }
+      body::before { display: none; }
+      .card { box-shadow: none; }
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <span class="bl"></span>
-    <span class="br"></span>
+    <span class="gc tl"></span><span class="gc tr"></span>
+    <span class="gc bl"></span><span class="gc br"></span>
+    <span class="rcb tl"></span><span class="rcb tr"></span>
+    <span class="rcb bl"></span><span class="rcb br"></span>
 
-    <div class="top">
-      <div class="l"><span class="dot"></span>ARK-9 // LINK</div>
-      <div class="r">SECTOR&nbsp;7G</div>
+    <div class="inner">
+      <div class="top">
+        <div class="l">&mdash;&nbsp;Sealed With Love&nbsp;&mdash;</div>
+        <div class="r">L<span class="heart">&hearts;</span>A</div>
+      </div>
+
+      <div class="ornament">&#10086;&nbsp;&nbsp;&#10086;&nbsp;&nbsp;&#10086;</div>
+      <h1>Unlock</h1>
+      <div class="sub">&mdash; Scan to begin &mdash;</div>
+
+      <div class="divider">
+        <span class="line"></span>
+        <span class="glyph">&#10047;</span>
+        <span class="line"></span>
+      </div>
+
+      <div class="qr-frame">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=0&qzone=1&format=svg&data=https%3A%2F%2Flasseprogramming.github.io%2Fwedding%2F"
+          alt="QR code for https://lasseprogramming.github.io/wedding/"
+        />
+      </div>
+
+      <div class="url">lasseprogramming.github.io/wedding</div>
+
+      <div class="foot">
+        <span class="script">A keepsake awaits</span>
+        Solve the Cipher &middot; Find the Key
+      </div>
     </div>
-
-    <h1>UNLOCK</h1>
-    <div class="sub">&gt; SCAN&nbsp;TO&nbsp;BEGIN &lt;</div>
-
-    <div class="qr-frame">
-      <img
-        src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=0&qzone=1&format=svg&data=https%3A%2F%2Flasseprogramming.github.io%2Fwedding%2F"
-        alt="QR code for https://lasseprogramming.github.io/wedding/"
-      />
-    </div>
-
-    <div class="url">lasseprogramming.github.io/wedding</div>
-    <div class="foot">SOLVE&nbsp;THE&nbsp;CIPHER &middot; FIND&nbsp;THE&nbsp;KEY</div>
   </div>
 </body>
 </html>
